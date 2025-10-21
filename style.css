@@ -1,0 +1,5 @@
+:root { --gold: #c59d5f; }
+.text-gold { color: var(--gold); }
+.border-gold { border-color: rgba(197,157,95,0.85); }
+.font-playfair { font-family: 'Playfair Display', serif; }
+.font-montserrat { font-family: 'Montserrat', sans-serif; }
