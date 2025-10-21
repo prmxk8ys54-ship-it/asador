@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cárdenas Prime</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --gold: #c59d5f; }
+    .text-gold { color: var(--gold); }
+    .border-gold { border-color: rgba(197,157,95,0.85); }
+    .font-playfair { font-family: 'Playfair Display', serif; }
+    .font-montserrat { font-family: 'Montserrat', sans-serif; }
+  </style>
+</head>
+<body class="bg-black text-gray-100 font-montserrat">
+
+  <!-- Navbar -->
+  <header id="navbar" class="fixed w-full z-50 transition-all duration-500 bg-transparent">
+    <nav class="max-w-7xl mx-auto px-6 md:px-10 lg:px-16 flex items-center justify-between h-20">
+      <div class="flex items-center gap-4 cursor-pointer" onclick="navigate('home')">
+        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center shadow-2xl">
+          <span class="text-gold text-xl font-playfair">CP</span>
+        </div>
+        <span class="hidden md:block font-playfair text-gold text-lg tracking-wider">Cárdenas Prime</span>
+      </div>
+
+      <ul class="hidden md:flex gap-8 uppercase text-sm tracking-widest text-gray-300">
+        <li><a href="#" onclick="navigate('home')" class="hover:text-white">Inicio</a></li>
+        <li><a href="#" onclick="navigate('carta')" class="hover:text-white">Carta</a></li>
+        <li><a href="#" onclick="navigate('experiencia')" class="hover:text-white">Experiencia</a></li>
+        <li><a href="#" onclick="navigate('galeria')" class="hover:text-white">Galería</a></li>
+        <li><a href="#" onclick="navigate('reservas')" class="hover:text-white">Reservas</a></li>
+        <li><a href="#" onclick="navigate('contacto')" class="hover:text-white">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Contenido dinámico -->
+  <main id="content"></main>
+
+  <!-- Footer -->
+  <footer class="border-t border-black/20 py-8 text-center text-sm text-gray-400 bg-black/50">
+    © <span id="year"></span> Cárdenas Prime. Todos los derechos reservados.
+  </footer>
+
+  <script>
+    const navbar = document.getElementById("navbar");
+    const content = document.getElementById("content");
+    const year = document.getElementById("year");
+    year.textContent = new Date().getFullYear();
+
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 30) {
+        navbar.classList.add("backdrop-blur-md", "bg-black/40", "border-b", "border-black/30");
+      } else {
+        navbar.classList.remove("backdrop-blur-md", "bg-black/40", "border-b", "border-black/30");
+      }
+    });
+
+    const pages = {
+      home: `
+        <section class="relative h-screen flex items-center justify-center">
+          <div class="absolute inset-0 -z-10 overflow-hidden">
+            <video autoplay muted loop playsinline class="w-full h-full object-cover brightness-75"
+              poster="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1600&q=80">
+              <source src="https://player.vimeo.com/external/352602814.sd.mp4?s=3d1f4f3b2f1e3f6a4b9bde6b0f0f6ef1a3e2c6e7&profile_id=164&oauth2_token_id=57447761" type="video/mp4" />
+            </video>
+            <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-black/50 to-black/70"></div>
+          </div>
+
+          <div class="text-center px-6 md:px-0 max-w-3xl">
+            <h1 class="font-playfair text-gold text-5xl md:text-7xl mb-4 tracking-tight">Cárdenas Prime</h1>
+            <p class="text-gray-300 text-lg md:text-xl mb-8">La excelencia de la carne madurada — donde la técnica se une al arte.</p>
+            <div class="flex items-center justify-center gap-4">
+              <button onclick="navigate('reservas')" class="px-8 py-3 rounded-full border border-gold text-gold hover:bg-gold/10 transition">Reservar mesa</button>
+              <button onclick="navigate('experiencia')" class="px-6 py-3 rounded-full bg-white/5 text-gray-200 hover:brightness-110 transition">Nuestra experiencia</button>
+            </div>
+          </div>
+        </section>
+      `,
+      carta: `
+        <div class="min-h-screen pt-24 pb-16 px-6 md:px-10 max-w-6xl mx-auto">
+          <h1 class="font-playfair text-4xl text-gold mb-8 border-b border-gold/20 pb-2">La Carta</h1>
+          <p>Descubre nuestros cortes de carne madurada, preparados con precisión y pasión.</p>
+          <ul class="divide-y divide-gray-800 mt-6">
+            <li class="py-6 flex justify-between">
+              <div>
+                <h3 class="font-playfair text-xl text-white">Ribeye Dry-Aged 45 días</h3>
+                <p class="text-gray-400 text-sm max-w-lg">Corte seleccionado, madurado en cava controlada, servido con mantequilla de hueso y sal en escamas.</p>
+              </div>
+              <span class="text-gold font-medium">€58</span>
+            </li>
+            <li class="py-6 flex justify-between">
+              <div>
+                <h3 class="font-playfair text-xl text-white">Solomillo Prime</h3>
+                <p class="text-gray-400 text-sm max-w-lg">Filete de primera calidad a la brasa con puré de apionabo y reducción de vino tinto.</p>
+              </div>
+              <span class="text-gold font-medium">€64</span>
+            </li>
+          </ul>
+        </div>
+      `,
+      experiencia: `
+        <div class="min-h-screen pt-24 pb-16 px-6 md:px-10 max-w-6xl mx-auto">
+          <h1 class="font-playfair text-4xl text-gold mb-8 border-b border-gold/20 pb-2">Nuestra Experiencia</h1>
+          <p>En Cárdenas Prime, la maduración de la carne es una ceremonia. Cada pieza reposa en nuestras cavas durante semanas, desarrollando aromas intensos y una textura incomparable.</p>
+          <img src="https://images.unsplash.com/photo-1543352634-2e6c1a89b9d3?auto=format&fit=crop&w=1200&q=80" alt="Cava de maduración" class="rounded-xl shadow-lg my-8" />
+        </div>
+      `,
+      galeria: `
+        <div class="min-h-screen pt-24 pb-16 px-6 md:px-10 max-w-6xl mx-auto">
+          <h1 class="font-playfair text-4xl text-gold mb-8 border-b border-gold/20 pb-2">Galería</h1>
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+            ${[1,2,3,4,5,6].map(i => `<img src="https://source.unsplash.com/800x600/?steak,restaurant,${i}" class="rounded-lg object-cover" />`).join("")}
+          </div>
+        </div>
+      `,
+      reservas: `
+        <div class="min-h-screen pt-24 pb-16 px-6 md:px-10 max-w-6xl mx-auto">
+          <h1 class="font-playfair text-4xl text-gold mb-8 border-b border-gold/20 pb-2">Reservas</h1>
+          <form onsubmit="event.preventDefault();alert('Reserva enviada correctamente.');" class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-black/40 p-8 rounded-2xl border border-black/30">
+            <input placeholder="Nombre" class="p-3 rounded bg-transparent border border-black/20 text-gray-100" required>
+            <input type="email" placeholder="Correo" class="p-3 rounded bg-transparent border border-black/20 text-gray-100" required>
+            <input placeholder="Teléfono" class="p-3 rounded bg-transparent border border-black/20 text-gray-100" required>
+            <select class="p-3 rounded bg-transparent border border-black/20 text-gray-100">
+              <option>1 persona</option><option>2 personas</option><option>3 personas</option><option>4 personas</option>
+            </select>
+            <input type="date" class="p-3 rounded bg-transparent border border-black/20 text-gray-100" required>
+            <input type="time" class="p-3 rounded bg-transparent border border-black/20 text-gray-100" required>
+            <button type="submit" class="md:col-span-2 mt-4 px-6 py-3 rounded-full border border-gold text-gold hover:bg-gold/10 transition">Enviar reserva</button>
+          </form>
+        </div>
+      `,
+      contacto: `
+        <div class="min-h-screen pt-24 pb-16 px-6 md:px-10 max-w-6xl mx-auto">
+          <h1 class="font-playfair text-4xl text-gold mb-8 border-b border-gold/20 pb-2">Contacto</h1>
+          <p>Cárdenas Prime — Calle Falsa 123, Madrid, España</p>
+          <p>Tel: +34 600 000 000 · reservas@cardenasprime.com</p>
+          <iframe class="rounded-xl mt-6" width="100%" height="400" loading="lazy" style="border:0"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3048.1234567890123!2d-3.70379!3d40.41678!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1sPuerta%20del%20Sol!5e0!3m2!1ses!2ses!4v1697040000000"></iframe>
+        </div>
+      `
+    };
+
+    function navigate(page) {
+      content.innerHTML = pages[page] || pages.home;
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    navigate("home"); // Cargar inicio al arrancar
+  </script>
+</body>
+</html>
